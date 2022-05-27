@@ -6,13 +6,13 @@ import 'dotenv/config'
 
 export class contenidosService{
 
-    getJuego = async () => {
+    getJuego = async (id) => {
         console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id',sql.Int, id)
-            .query(`SELECT * from ${juegosTabla} left join ${contenidosTabla} on juegosTabla.id = contenidosTabla.id `);
+            .query(`SELECT * from ${juegosTabla} inner join ${contenidosTabla} on juegosTabla.id = contenidosTabla.id`);
         console.log(response)
 
         return response.recordset[0];
