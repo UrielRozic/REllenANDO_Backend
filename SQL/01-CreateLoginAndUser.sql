@@ -1,0 +1,13 @@
+USE [master]
+GO
+CREATE LOGIN [rellenando] WITH PASSWORD=N'rellenando', DEFAULT_DATABASE=[REllenANDO], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+GO
+
+USE [REllenANDO]
+GO
+CREATE USER [rellenando] FOR LOGIN [rellenando]
+GO
+USE [REllenANDO]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [rellenando]
+GO
