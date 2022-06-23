@@ -1,0 +1,86 @@
+swagger: "2.0"
+info:
+  description: "Esta es la API de REllenANDO "
+  version: "1.0.0"
+  title: "Api REllenANDO"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+    host: "petstore.swagger.io"
+    basePath: "/v2"
+    tags:
+    - name: "Outh"
+      description: "Crea el token"
+    - name: "Contenidos"
+      description: "Todo sobre los contenidos"
+    
+    
+      externalDocs:
+        description: "Find out more"
+        url: "http://swagger.io"
+    
+    
+      externalDocs:
+        description: "Find out more about our store"
+        url: "http://swagger.io"
+    schemes:
+    - "https"
+    - "http"
+
+    paths:
+      /contenidos/juegos:
+          get:
+            tags:
+            - "Contenido"
+            summary: "Trae todo los juegos"
+            description: "Solamente ejecute"
+            operationId: "getJuego"
+            produces:
+            - "application/xml"
+            - "application/json"
+            responses:
+              "200":
+                description: "Operacion exitosa"
+                schema:
+                  type: "string"
+                  items:
+                    $ref: "#/definitions/Pet"
+      /contenidos/juegos/:id:
+          get:
+            tags:
+            - "Contenido"
+            summary: "Trae los juegos segun su id"
+            description: "Solamente ejecute"
+            operationId: "getJuegoById"
+            produces:
+            - "application/xml"
+            - "application/json"
+            responses:
+              "200":
+                description: "Operacion exitosa"
+                schema:
+                  type: "string"
+                  items:
+                    $ref: "#/definitions/Pet"
+      /contenidos/DetallesJuegos:
+          get:
+            tags:
+            - "Contenido"
+            summary: "Trae la descripcion de los juegos"
+            description: "Solamente ejecute"
+            operationId: "getDetalleJuego"
+            produces:
+            - "application/xml"
+            - "application/json"
+            responses:
+              "200":
+                description: "Operacion exitosa"
+                schema:
+                  type: "string"
+                  items:
+                    $ref: "#/definitions/Pet"
+      
+    
