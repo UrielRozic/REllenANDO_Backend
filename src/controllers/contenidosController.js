@@ -10,8 +10,8 @@ const ContenidosService = new contenidosService();
 /**
  * @swagger
  *  tags:
- *    name: get
- *    description: gets
+ *    name: Contenidos
+ *    description: endpoint contenidos
  */
 
 /**
@@ -19,7 +19,7 @@ const ContenidosService = new contenidosService();
  * /contenidos/juegos:
  *   get:
  *     summary: Trae todos los juegos
- *     tags: [Gets]
+ *     tags: [Contenidos]
  *     responses:
  *       200:
  *         description: the list of the posts
@@ -45,7 +45,7 @@ const ContenidosService = new contenidosService();
  * /contenidos/juegos/:id:
  *   get:
  *     summary: Trae los juegos segun el id
- *     tags: [Gets]
+ *     tags: [Contenidos]
  *     responses:
  *       200:
  *         description: the list of the posts
@@ -61,30 +61,6 @@ const ContenidosService = new contenidosService();
     console.log(`This is a get operation`);
   
     const juego = await ContenidosService.getJuegoById(req.params.id);
-  
-    return res.status(200).json(juego);
-  });
-
-  /**
- * @swagger
- * /contenidos/DetallesJuegos:
- *   get:
- *     summary: Trae la descripcion de los juegos
- *     tags: [Gets]
- *     responses:
- *       200:
- *         description: the list of the posts
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *           
- */
-  router.get('/DetallesJuegos', async (req, res) => {
-    console.log(`This is a get operation`);
-    
-    const juego = await ContenidosService.getDetalleJuego();
   
     return res.status(200).json(juego);
   });

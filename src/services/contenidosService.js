@@ -19,18 +19,7 @@ export class contenidosService{
         return response.recordset;
         
     }
-    getNombresJuego = async () => {
-        console.log('This is a function on the service');
 
-        const pool = await sql.connect(config);
-        const response = await pool.request()
-            
-            .query(`SELECT juegos.nombre from ${juegosTabla}`);
-        console.log(response)
-
-        return response.recordset;
-        
-    }
     getJuegoById = async (id) => {
         console.log('This is a function on the service');
 
@@ -41,18 +30,6 @@ export class contenidosService{
         console.log(response)
 
         return response.recordset[0];
-    }
-    getDetalleJuego = async () => {
-        console.log('This is a function on the service');
-
-        const pool = await sql.connect(config);
-        const response = await pool.request()
-            
-            .query(`SELECT juegos.descripcion from ${juegosTabla}`);
-        console.log(response)
-
-        return response.recordset;
-        
     }
 
 
