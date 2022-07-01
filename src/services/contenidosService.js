@@ -4,6 +4,8 @@ import 'dotenv/config'
 
 const contenidosTabla = process.env.DB_TABLA_CONTENIDOS;
 const juegosTabla = process.env.DB_TABLA_JUEGOS;
+const preguntasTabla = process.env.DB_TABLA_PREGUNTAS;
+const respuestasTabla = process.env.DB_TABLA_RESPUESTAS;
 
 export class contenidosService{
 
@@ -31,6 +33,62 @@ export class contenidosService{
 
         return response.recordset[0];
     }
+
+    getContenido = async (contenido) => {
+        console.log('This is a function on the service');
+
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+            .input('contenido',sql.VarChar, contenido)
+            .query(`SELECT * from ${contenidosTabla} where contenido = @contenido `);
+        console.log(response)
+
+        return response.recordset;
+        
+    }
+
+    getContenidoById = async (id, contenido) => {
+        console.log('This is a function on the service');
+
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+            .input('id',sql.Int, id)
+            .input('contenido',sql.VarChar, contenido)
+            .query(`SELECT * from ${contenidosTabla} where Id_Juego = @id && contenido = @contenido`);
+        console.log(response)
+
+        return response.recordset[0];
+    }
+
+    getPregunta = async () => {
+        console.log('This is a function on the service');
+
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+            
+            .query(`SELECT * from ${preguntasTabla} INNER JOIN ${contenidosTabla} ON preguntas.Id_Contenido = ${contenidosTabla}.Id_Contenido`);
+        console.log(response)
+
+        return response.recordset;
+        
+    }
+
+    getPreguntaById = async (id) => {
+        console.log('This is a function on the service');
+
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+            .input('id',sql.Int, id)
+            .query(`SELECT * from ${preguntasTabla} INNER JOIN ${contenidosTabla} ON preguntas.Id_Contenido = ${contenidosTabla}.Id_Contenido where Id_Pregunta = @id`);
+        console.log(response)
+
+        return response.recordset;
+        
+    }
+
+
+
+    
 
 
 

@@ -7,6 +7,8 @@ const config = {
     database: process.env.DB_NAME,
     table: process.env.DB_TABLA_CONTENIDOS,
     table: process.env.DB_TABLA_JUEGOS,
+    table: process.env.DB_TABLA_PREGUNTAS,
+    table: process.env.DB_TABLA_RESPUESTAS,
     options: {
       trustServerCertificate: true,
       trustedConnection: true,

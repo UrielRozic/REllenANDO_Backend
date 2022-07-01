@@ -1,4 +1,4 @@
-/*import { ExtractJwt, Strategy } from "passport-jwt";
+import { ExtractJwt, Strategy } from "passport-jwt";
 import passport from "passport";
 import "dotenv/config";
 
@@ -26,4 +26,4 @@ export const Authenticate = (req, res, next) => {
       next();
     }
   })(req, res, next);
-};*/
+};
