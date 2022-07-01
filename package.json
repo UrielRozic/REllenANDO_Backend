@@ -19,5 +19,6 @@
     "passport-jwt": "^4.0.0",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.4.0"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

@@ -66,6 +66,11 @@ const ContenidosService = new contenidosService();
     return res.status(200).json(juego);
   });
 
+  router.get('/', Authenticate, async (req, res) => {
+  
+    return res.send("holaaaaaaaaaaaaaaa");
+  });
+
   router.get('/contenidos/:contenido', Authenticate, async (req, res) => {
     console.log(`Request URL Param: ${req.params.contenido}`);
     console.log(`This is a get operation`);
