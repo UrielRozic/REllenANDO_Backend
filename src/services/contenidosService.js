@@ -22,6 +22,21 @@ export class contenidosService{
         
     }
 
+    getPregunta = async () => {
+        console.log('This is a function on the service');
+        
+        const pool = await sql.connect(config);
+        console.log("entre")
+        const response = await pool.request()
+        .query(`SELECT * from ${preguntasTabla} INNER JOIN ${contenidosTabla} ON preguntas.Id_Pregunta = ${contenidosTabla}.Id_Contenido`)
+        console.log("entre2")
+            
+        console.log(response)
+
+        return response.recordset;
+        
+    }
+
     getJuegoById = async (id) => {
         console.log('This is a function on the service');
 
@@ -60,18 +75,6 @@ export class contenidosService{
         return response.recordset[0];
     }
 
-    getPregunta = async () => {
-        console.log('This is a function on the service');
-
-        const pool = await sql.connect(config);
-        const response = await pool.request()
-            
-            .query(`SELECT * from ${preguntasTabla} INNER JOIN ${contenidosTabla} ON preguntas.Id_Contenido = ${contenidosTabla}.Id_Contenido`);
-        console.log(response)
-
-        return response.recordset;
-        
-    }
 
     getPreguntaById = async (id) => {
         console.log('This is a function on the service');
