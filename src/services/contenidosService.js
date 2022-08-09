@@ -28,7 +28,7 @@ export class contenidosService{
         const pool = await sql.connect(config);
         console.log("entre")
         const response = await pool.request()
-        .query(`SELECT * from ${preguntasTabla} INNER JOIN ${contenidosTabla} ON preguntas.Id_Pregunta = ${contenidosTabla}.Id_Contenido`)
+        .query(`SELECT * from ${preguntasTabla} INNER JOIN ${contenidosTabla} ON preguntas.Id_Contenido = ${contenidosTabla}.Id_Contenido`)
         console.log("entre2")
             
         console.log(response)
