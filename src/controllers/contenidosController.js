@@ -65,7 +65,7 @@ const ContenidosService = new contenidosService();
     return res.status(200).json(juego);
   });
 
-  router.get('/', Authenticate, async (req, res) => {
+  router.get('/', async (req, res) => {
   
     return res.send("holaaaaaaaaaaaaaaa");
   });
