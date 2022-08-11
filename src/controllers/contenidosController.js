@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { Authenticate } from '../common/jwt.js';
 import { contenidosService } from '../services/contenidosService.js';
 
 const router = Router();
