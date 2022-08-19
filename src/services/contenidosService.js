@@ -189,7 +189,7 @@ export class contenidosService{
                 }
             })
 
-        const query=`INSERT INTO ${contenidosTabla}(contenido, descripcion, edad, titulo) VALUES (scontenido, @descripcion, @edad, @titulo)`
+        const query=`INSERT INTO ${contenidosTabla}(contenido, descripcion, edad, titulo) VALUES ('${Contenido.contenido}', '${Contenido.descripcion}', '${Contenido.edad}', '${Contenido.titulo}')`
         let response = await pool.query(query);
         console.log(response)
 
