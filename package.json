@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "heroku-postbuild": "npm run build"
+    "start": "node index.js"
   },
   "author": "Uriel Rozic y Galo Kaplan",
   "license": "ISC",
