@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "heroku-postbuild": "npm run build"
   },
   "author": "Uriel Rozic y Galo Kaplan",
   "license": "ISC",
@@ -18,6 +19,7 @@
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "pg": "^8.7.3",
+    "serve": "^14.0.1",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.4.0"
   },
