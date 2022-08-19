@@ -1,91 +1,199 @@
 import sql from 'mssql'
 import config from '../../db.js'
 import 'dotenv/config'
+import pkg from 'pg'
 
 const contenidosTabla = process.env.DB_TABLA_CONTENIDOS;
 const juegosTabla = process.env.DB_TABLA_JUEGOS;
 const preguntasTabla = process.env.DB_TABLA_PREGUNTAS;
-const respuestasTabla = process.env.DB_TABLA_RESPUESTAS;
 
 export class contenidosService{
 
     getJuego = async () => {
         console.log('This is a function on the service');
 
-        const pool = await sql.connect(config);
-        const response = await pool.request()
-            
-            .query(`SELECT * from ${juegosTabla} INNER JOIN ${contenidosTabla} ON juegos.Id_Juego = ${contenidosTabla}.Id_Contenido`);
-        console.log(response)
+        const { Pool } = pkg;
+        const pool = new Pool(
+            {
+                connectionString:   process.env.DB_SERVER,
+                ssl: {
+                    rejectUnauthorized: false
+                }
+            })
 
-        return response.recordset;
+
+            const query=`SELECT * from ${juegosTabla} INNER JOIN ${contenidosTabla} ON ${juegosTabla}.id_juego = ${contenidosTabla}.id_contenido`
+            console.log(query)
+            let response = await pool.query(query)
+            console.log(response);
+
+
+
+
+            pool.end()
+
+
+        return response.rows;
         
     }
 
     getPregunta = async () => {
-        console.log('This is a function on the service');
-        
-        const pool = await sql.connect(config);
-        console.log("entre")
-        const response = await pool.request()
-        .query(`SELECT * from ${preguntasTabla} INNER JOIN ${contenidosTabla} ON preguntas.Id_Contenido = ${contenidosTabla}.Id_Contenido`)
-        console.log("entre2")
-            
-        console.log(response)
 
-        return response.recordset;
+        console.log('This is a function on the service');
+
+        const { Pool } = pkg;
+        const pool = new Pool(
+            {
+                connectionString:   process.env.DB_SERVER,
+                ssl: {
+                    rejectUnauthorized: false
+                }
+            })
+
+
+            const query=`SELECT * from ${preguntasTabla} INNER JOIN ${contenidosTabla} ON ${preguntasTabla}.id_contenido = ${contenidosTabla}.id_contenido`
+            console.log(query);
+            let response = await pool.query(query)
+
+
+
+
+            pool.end()
+
+
+        return response.rows;
+
+        
         
     }
 
     getJuegoById = async (id) => {
+
         console.log('This is a function on the service');
 
-        const pool = await sql.connect(config);
-        const response = await pool.request()
-            .input('id',sql.Int, id)
-            .query(`SELECT * from ${juegosTabla} INNER JOIN ${contenidosTabla} ON juegos.Id_Juego = ${contenidosTabla}.Id_Contenido where Id_Juego = @id`);
-        console.log(response)
+        const { Pool } = pkg;
+        const pool = new Pool(
+            {
+                connectionString:   process.env.DB_SERVER,
+                ssl: {
+                    rejectUnauthorized: false
+                }
+            })
 
-        return response.recordset[0];
+
+            const query=`SELECT * from ${juegosTabla} INNER JOIN ${contenidosTabla} ON juegos.id_juego = ${contenidosTabla}.id_contenido where id_juego = ${id}`
+            let response = await pool.query(query)
+
+
+
+
+            pool.end()
+
+
+        return response.rows[0];
+
     }
 
     getContenido = async (contenido) => {
+
         console.log('This is a function on the service');
 
-        const pool = await sql.connect(config);
-        const response = await pool.request()
-            .input('contenido',sql.VarChar, contenido)
-            .query(`SELECT * from ${contenidosTabla} where contenido = @contenido `);
-        console.log(response)
+        const { Pool } = pkg;
+        const pool = new Pool(
+            {
+                connectionString:   process.env.DB_SERVER,
+                ssl: {
+                    rejectUnauthorized: false
+                }
+            })
 
-        return response.recordset;
+
+            const query=`SELECT * from ${contenidosTabla} where contenido = '${contenido}' `
+            console.log(query);
+            let response = await pool.query(query)
+
+            pool.end()
+
+
+        return response.rows;
+        
         
     }
 
-    getContenidoById = async (id) => {
+    getContenidoById = async (id, contenido) => {
         console.log('This is a function on the service');
 
-        const pool = await sql.connect(config);
-        const response = await pool.request()
-            .input('id',sql.Int, id)
-            .query(`SELECT * FROM ${contenidosTabla} WHERE Id_Contenido = @id`);
-        console.log(response)
+        const { Pool } = pkg;
+        const pool = new Pool(
+            {
+                connectionString:   process.env.DB_SERVER,
+                ssl: {
+                    rejectUnauthorized: false
+                }
+            })
 
-        return response.recordset[0];
+
+
+
+           const query=`SELECT * from ${contenidosTabla} where id_contenido = ${id}`
+           let response = await pool.query(query)
+
+
+
+
+            pool.end()
+
+
+        return response.rows[0];
     }
 
 
     getPreguntaById = async (id) => {
+
         console.log('This is a function on the service');
 
-        const pool = await sql.connect(config);
-        const response = await pool.request()
-            .input('id',sql.Int, id)
-            .query(`SELECT * from ${preguntasTabla} INNER JOIN ${contenidosTabla} ON preguntas.Id_Contenido = ${contenidosTabla}.Id_Contenido where Id_Pregunta = @id`);
+        const { Pool } = pkg;
+        const pool = new Pool(
+            {
+                connectionString:   process.env.DB_SERVER,
+                ssl: {
+                    rejectUnauthorized: false
+                }
+            })
+
+
+            const query=`SELECT * from ${preguntasTabla} INNER JOIN ${contenidosTabla} ON preguntas.id_contenido = ${contenidosTabla}.id_contenido where id_pregunta = ${id}`
+            let response = await pool.query(query)
+
+
+
+
+            pool.end()
+
+
+        return response.rows;
+        
+    }
+
+    createContenido = async (Contenido) => {
+        
+
+        console.log('This is a function on the service');
+
+        const { Pool } = pkg;
+        const pool = new Pool(
+            {
+                connectionString:   process.env.DB_SERVER,
+                ssl: {
+                    rejectUnauthorized: false
+                }
+            })
+
+        const query=`INSERT INTO ${contenidosTabla}(contenido, descripcion, edad, titulo) VALUES (scontenido, @descripcion, @edad, @titulo)`
+        let response = await pool.query(query);
         console.log(response)
 
-        return response.recordset;
-        
+        return response.rows;
     }
 
 

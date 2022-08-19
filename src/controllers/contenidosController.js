@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { Authenticate } from '../common/jwt.js';
 import { contenidosService } from '../services/contenidosService.js';
 
 const router = Router();
@@ -66,7 +65,7 @@ const ContenidosService = new contenidosService();
     return res.status(200).json(juego);
   });
 
-  router.get('/', Authenticate, async (req, res) => {
+  router.get('/', async (req, res) => {
   
     return res.send("holaaaaaaaaaaaaaaa");
   });
@@ -82,7 +81,7 @@ const ContenidosService = new contenidosService();
 
 
   router.get('/contenidos/:id', async (req, res) => {
-    console.log(`Request URL Param: ${req.params.id}`);
+    console.log(`Request URL Param: ${req.params.contenido, req.params.id}`);
     console.log(`This is a get operation`);
   
     const contenido = await ContenidosService.getContenidoById(req.params.id);
@@ -107,6 +106,12 @@ const ContenidosService = new contenidosService();
   
     return res.status(200).json(pregunta);
   });
+  router.post('/agregar', async (req, res) => {
+    console.log(`This is a post operation`);
+    
+    const agregar = await ContenidosService.createContenido(req.body);
   
+    return res.status(200).json(agregar);
+  });
 
   export default router;
