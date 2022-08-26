@@ -6,7 +6,7 @@ import swaggerJsDoc from 'swagger-jsdoc';
 
 
 const app = express();
-const port = 5000;
+
 
 app.use(cors());
 app.use(express.json());
@@ -76,6 +76,8 @@ const options = {
 const specs = swaggerJsDoc(options);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
+let port = process.env.PORT || 5000;
+
 app.listen(port, () => {
-  process.env.PORT || 5000
+  console.log(`App is running at the port ${port}`)
 });
