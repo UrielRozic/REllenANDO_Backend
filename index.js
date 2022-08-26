@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import contenidosRouter from "./src/controllers/contenidosController.js";
+import usuarioRouter from "./src/controllers/usuarioController.js";
 import swaggerUI from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 
 app.use("/contenidos", contenidosRouter);
+app.use("/usuario", usuarioRouter);
 
 
 
