@@ -2,9 +2,11 @@ import express from "express";
 import cors from "cors";
 import contenidosRouter from "./src/controllers/contenidosController.js";
 import usuarioRouter from "./src/controllers/usuarioController.js";
+import { jwtStrategy } from "./src/common/jwt.js"
 import swaggerUI from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
-
+import TokenRouter from "./src/controllers/tokenController.js";
+import passport from "passport";
 
 const app = express();
 
@@ -13,10 +15,12 @@ app.use(cors());
 app.use(express.json());
 
 
-
+passport.use(jwtStrategy);
+app.use(passport.initialize());
 
 app.use("/contenidos", contenidosRouter);
 app.use("/usuario", usuarioRouter);
+app.use("/auth", TokenRouter);
 
 
 

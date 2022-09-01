@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import { usuarioService } from '../services/usuarioService.js';
+import { tokenService } from '../services/tokenService.js';
 
 const router = Router();
 const UsuarioService = new usuarioService();
+const TokenService = new tokenService();
 
 router.post('/logIn', async(req, res) => { 
     console.log(`This is a post operation`);
@@ -12,7 +14,7 @@ router.post('/logIn', async(req, res) => {
             return res.status(404).json("Error en el loguearse");
         } else {
             const id = usuario[0].id_usuario
-            const token = authService.getToken(id)
+            const token = TokenService.getToken(id)
             return res.status(200).json({ token, id });
         }
     }catch (error) {
