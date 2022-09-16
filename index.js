@@ -7,7 +7,7 @@ import swaggerUI from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
 import TokenRouter from "./src/controllers/tokenController.js";
 import passport from "passport";
-import * as http from 'http';
+import process from 'node:process';
 
 const app = express();
 
@@ -91,9 +91,11 @@ app.listen(port, () => {
 });
 
 
-const server = http.createServer((req, res) => {
-  res.end();
-});
-server.on('clientError', (err, socket) => {
-  socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
-});
+
+
+
+
+setTimeout(() => {
+  console.log('This will still run.');
+}, 500);
+
