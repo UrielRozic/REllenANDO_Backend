@@ -9,6 +9,9 @@ import TokenRouter from "./src/controllers/tokenController.js";
 import passport from "passport";
 import process from 'process';
 import fs from 'fs'
+import timeout from 'connect-timeout'
+
+
 
 const app = express();
 
@@ -24,6 +27,7 @@ app.use(passport.initialize());
 app.use("/contenidos", contenidosRouter);
 app.use("/usuario", usuarioRouter);
 app.use("/auth", TokenRouter);
+app.use(timeout('5s'))
 
 
 
