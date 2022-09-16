@@ -7,8 +7,10 @@ import swaggerUI from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
 import TokenRouter from "./src/controllers/tokenController.js";
 import passport from "passport";
+import * as http from 'http';
 
 const app = express();
+
 
 
 app.use(cors());
@@ -86,4 +88,12 @@ let port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`App is running at the port ${port}`)
+});
+
+
+const server = http.createServer((req, res) => {
+  res.end();
+});
+server.on('clientError', (err, socket) => {
+  socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
 });
