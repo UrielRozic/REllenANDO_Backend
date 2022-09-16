@@ -108,3 +108,10 @@ setTimeout(() => {
 // Intentionally cause an exception, but don't catch it.
 nonexistentFunc();
 console.log('This will not run.');
+
+app.get('/app/:id', checkUserAuth, findApp, renderView, sendJSON);
+
+function checkUserAuth(req, res, next) {
+  if (req.session.user) return next();
+  return next(new NotAuthorizedError());
+}
