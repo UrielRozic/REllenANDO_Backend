@@ -7,7 +7,8 @@ import swaggerUI from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
 import TokenRouter from "./src/controllers/tokenController.js";
 import passport from "passport";
-import process from 'node:process';
+import process from 'process';
+import fs from 'fs'
 
 const app = express();
 
@@ -92,10 +93,18 @@ app.listen(port, () => {
 
 
 
-
-
+process.on('uncaughtException', (err, origin) => {
+  fs.writeSync(
+    process.stderr.fd,
+    `Caught exception: ${err}\n` +
+    `Exception origin: ${origin}`
+  );
+});
 
 setTimeout(() => {
   console.log('This will still run.');
 }, 500);
 
+// Intentionally cause an exception, but don't catch it.
+nonexistentFunc();
+console.log('This will not run.');
