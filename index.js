@@ -8,7 +8,7 @@ import swaggerJsDoc from 'swagger-jsdoc';
 import TokenRouter from "./src/controllers/tokenController.js";
 import passport from "passport";
 import process from 'process';
-
+import fs from 'fs'
 import timeout from 'connect-timeout'
 
 
@@ -97,4 +97,26 @@ app.listen(port, () => {
 
 
 
+process.on('uncaughtException', (err, origin) => {
+  fs.writeSync(
+    process.stderr.fd,
+    `Caught exception: ${err}\n` +
+    `Exception origin: ${origin}`
+  );
+});
+
+setTimeout(() => {
+  console.log('This will still run.');
+}, 500);
+
+// Intentionally cause an exception, but don't catch it.
+nonexistentFunc();
+console.log('This will not run.');
+
+app.get('/app/:id', checkUserAuth, findApp, renderView, sendJSON);
+
+function checkUserAuth(req, res, next) {
+  if (req.session.user) return next();
+  return next(new NotAuthorizedError());
+}
 
