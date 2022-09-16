@@ -17,6 +17,7 @@ export class contenidosService{
             {
                 connectionString:   process.env.DB_SERVER,
                 ssl: {
+                    required: true,
                     rejectUnauthorized: false
                 }
             })
@@ -46,6 +47,7 @@ export class contenidosService{
             {
                 connectionString:   process.env.DB_SERVER,
                 ssl: {
+                    required: true,
                     rejectUnauthorized: false
                 }
             })
@@ -76,6 +78,7 @@ export class contenidosService{
             {
                 connectionString:   process.env.DB_SERVER,
                 ssl: {
+                    required: true,
                     rejectUnauthorized: false
                 }
             })
@@ -103,6 +106,7 @@ export class contenidosService{
             {
                 connectionString:   process.env.DB_SERVER,
                 ssl: {
+                    required: true,
                     rejectUnauthorized: false
                 }
             })
@@ -128,6 +132,7 @@ export class contenidosService{
             {
                 connectionString:   process.env.DB_SERVER,
                 ssl: {
+                    required: true,
                     rejectUnauthorized: false
                 }
             })
@@ -157,6 +162,7 @@ export class contenidosService{
             {
                 connectionString:   process.env.DB_SERVER,
                 ssl: {
+                    required: true,
                     rejectUnauthorized: false
                 }
             })
@@ -185,6 +191,7 @@ export class contenidosService{
             {
                 connectionString:   process.env.DB_SERVER,
                 ssl: {
+                    required: true,
                     rejectUnauthorized: false
                 }
             })
