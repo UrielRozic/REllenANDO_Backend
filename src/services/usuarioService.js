@@ -18,12 +18,12 @@ export class usuarioService{
                     rejectUnauthorized: false
                 }
             })
-        const query=`INSERT INTO ${usuarioTabla} (email, contraseña) VALUES (?, ?)`;
-        const query2=`select * from ${usuarioTabla} where id=?`
-        let response= await pool.query(query2,[id]);
+        const query=`INSERT INTO ${Usuario} (email, contraseña) VALUES (?, ?)`;
+        const query2=`select * from ${Usuario} where email=?`
+        let response= await pool.query(query2,[email]);
         console.log(response)
         if(responsetype[0].tipo==true){
-            let response2 = await pool.query(query,[usuarioTabla.email, usuarioTabla.contraseña]);
+            let response2 = await pool.query(query,[Usuario.email, Usuario.contraseña]);
             
             console.log(response2);
             return response2.rows;

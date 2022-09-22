@@ -6,7 +6,7 @@ const router = Router();
 const UsuarioService = new usuarioService();
 const TokenService = new tokenService();
 
-router.post('/logIn', async(req, res) => { 
+router.post('/login', async(req, res) => { 
     console.log(`This is a post operation`);
     try {
         const usuario = await UsuarioService.getUsuario(req.body);
@@ -23,10 +23,19 @@ router.post('/logIn', async(req, res) => {
     }
 });
 
+router.post('/register', async(req, res) => { 
+    console.log(`This is a post operation`);
+  if(!req.body.email || !req.body.contraseña){
+    return res.status(400).json("Llenar todos los datos");
+  }
+  else{
+    const usuario = await UsuarioService.createUsuario(req.body);
+    return res.status(201).json(usuario);
+  }
+});
+
 
  
-
-
  
 
   
