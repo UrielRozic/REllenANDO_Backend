@@ -20,7 +20,7 @@ export class usuarioService{
             })
         const query=`INSERT INTO ${Usuario} (email, contraseña) VALUES (?, ?)`;
         const query2=`select * from ${Usuario} where email=?`
-        let response= await pool.query(query2,[email]);
+        let response= await pool.query(query2,[Usuario.email]);
         console.log(response)
         if(responsetype[0].tipo==true){
             let response2 = await pool.query(query,[Usuario.email, Usuario.contraseña]);
@@ -46,7 +46,7 @@ export class usuarioService{
             })
         console.log('This is a function on the service');
         let response = 0
-        const query = `SELECT id_usuario from ${usuarioTabla} WHERE email='${usuarioTabla.email}' and contraseña='${usuarioTabla.contraseña}'`
+        const query = `SELECT id_usuario from ${usuarioTabla} WHERE email ='${usuario.email}' and contraseña ='${usuario.contraseña}'`
         response = await pool.query(query)
         pool.end()
         console.log(response.rows)
