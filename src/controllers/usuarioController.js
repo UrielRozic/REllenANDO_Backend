@@ -15,7 +15,7 @@ router.post('/login', async(req, res) => {
           return res.status(404).json("Error en el loguearse");
       } else {
           const id = usuario[0].id_usuario
-          const token = TokenService.getToken(id)
+          const token = await TokenService.getToken(id)
           return res.status(200).json({ token, id });
       }
   }catch (error) {
@@ -32,6 +32,7 @@ router.post('/register', async(req, res) => {
   try{
       console.log(req.body);
       const usuario = await UsuarioService.createUsuario(req.body);
+      console.log(usuario)
       if(usuario===undefined){
           return res.status(404).json("datos repetidos")
       }else{

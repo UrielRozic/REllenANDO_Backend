@@ -18,19 +18,14 @@ export class usuarioService{
                     rejectUnauthorized: false
                 }
             })
-        const query=`INSERT INTO ${Usuario} (email, contraseña) VALUES (?, ?)`;
-        const query2=`select * from ${Usuario} where email=?`
-        let response= await pool.query(query2,[Usuario.email]);
-        console.log(response)
-        if(responsetype[0].tipo==true){
-            let response2 = await pool.query(query,[Usuario.email, Usuario.contraseña]);
-            
-            console.log(response2);
-            return response2.rows;
-        }
-        else{
-            return "Fallo";
-        }
+        const query=`INSERT INTO ${usuarioTabla} (email, contraseña) VALUES ('${Usuario.email}', '${Usuario.contraseña}')`;
+        const query2=`SELECT MAX(id_usuario) as id_usuario from ${usuarioTabla}`
+        console.log(query)
+        console.log(query2)
+        let response= await pool.query(query);
+        response= await pool.query(query2);
+        console.log(response.rows)
+        return response.rows[0]
     }
 
 
